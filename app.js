@@ -95,7 +95,6 @@ steam.prototype.makeRequest = function(obj) {
 
   //generate the path
   var path = path+qs.stringify(obj);
-  console.log(path);
   var options = {
     host: 'api.steampowered.com',
     port: 80,
@@ -107,7 +106,6 @@ steam.prototype.makeRequest = function(obj) {
       resData+=chunk;
     });
     res.on('end', function(){
-      console.log(resData);
       if (format == 'json') resData = JSON.parse(resData)
       callback(resData);
     })
