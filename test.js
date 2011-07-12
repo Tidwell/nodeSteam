@@ -2,7 +2,7 @@ var log = require('logging');
 
 var steam = require('./app');
 var s = new steam({
-  apiKey: '9FE25C516BE06DE9CBA1511C6EF0F1AD'
+  apiKey: 'XXX'
 });
 
 /*
