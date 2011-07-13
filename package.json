@@ -1,0 +1,15 @@
+{
+    "name": "steam",
+    "version": "0.1.0",
+    "description": "A wrapper for the Steam Web API.",
+    "keywords": ["steam", "team fortress 2"],
+    "author": "Aaron Tidwell <aaron.tidwell@gmail.com>",
+    "main": "./lib/steam",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/Tidwell/nodeSteam"
+    },
+    "dependencies": {
+    },
+    "engines": ["node >= 0.5.0"]
+}

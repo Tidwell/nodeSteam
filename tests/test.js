@@ -1,5 +1,5 @@
 var assert = require('assert');
-var steam = require('./app');
+var steam = require('../lib/steam');
 
 //forgetting to pass in apiKey
 assert.throws(function() {
