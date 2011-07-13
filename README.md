@@ -9,7 +9,9 @@ A [node.js](http://github.com/joyent/node) wrapper for Valve's [Steam Web API](h
 
 ### Methods
 
-  Note that all methods accept a single options object.  The key names match the query string parameters specified in the valve documentation. (additional docs coming soon.  For now, see usage and the valve documenation for any questions)
+  Note that all methods accept a single options object.  The key names match the query string parameters specified in the valve documentation. (Additional docs coming soon.  For now, see usage and the valve documenation for any questions).
+  
+  If using JSON for results (default), the result will automatically be parsed into a json object before being passed to the callback.  Any
 
 ####getNewsForApp
 
@@ -32,7 +34,7 @@ A [node.js](http://github.com/joyent/node) wrapper for Valve's [Steam Web API](h
     
     var s = new steam({
       apiKey: 'XXXXXXXXXXXXXXXX',
-      format: 'json' //optional
+      format: 'json' //optional ['json', 'xml', 'vdf']
     });
     s.getNewsForApp({
       appid: 440,
