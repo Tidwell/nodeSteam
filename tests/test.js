@@ -16,21 +16,21 @@ assert.throws(function() {
 //invalid format
 assert.throws(function() {
   var q = new steam({
-    apiKey: '9FE25C516BE06DE9CBA1511C6EF0F1AD',
+    apiKey: 'XXXX',
     format: 'qwe'
   }); 
 }, Error, 'Incorrect format did not throw error');
 //invalid format data type
 assert.throws(function() {
   var q = new steam({
-    apiKey: '9FE25C516BE06DE9CBA1511C6EF0F1AD',
+    apiKey: 'XXXX',
     format: ['qwe', 'asdf']
   }); 
 }, Error, 'Incorrect format data type did not throw error');
 
 
 var s = new steam({
-  apiKey: '9FE25C516BE06DE9CBA1511C6EF0F1AD',
+  apiKey: 'XXXX',
 });
 //invalid getNewsForApp
 assert.throws(function() {
