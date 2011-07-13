@@ -9,9 +9,11 @@ A [node.js](http://github.com/joyent/node) wrapper for Valve's [Steam Web API](h
 
 ### Methods
 
-  Note that all methods accept a single options object.  The key names match the query string parameters specified in the valve documentation. (Additional docs coming soon.  For now, see usage and the valve documenation for any questions).
+  All methods accept a single options object.  The key names match the query string parameters specified in the valve documentation. (Additional docs coming soon.  For now, see usage and the valve documentation for any questions).
   
-  If using JSON for results (default), the result will automatically be parsed into a json object before being passed to the callback.  Any
+  If using JSON for results (default), the result will automatically be parsed into a json object before being passed to the callback.  Any other formats will return the raw data (xml or vdf).  Use of the API requires an API key, obtainable [here](http://steamcommunity.com/dev/apikey).  
+  
+  This implementation is not supported, endorsed, or created by Valve - I'm just a fan.
 
 ####getNewsForApp
 
