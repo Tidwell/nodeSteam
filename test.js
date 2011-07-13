@@ -111,9 +111,6 @@ assert.throws(function() {
 
 /*Correctly implimented*/
 assert.doesNotThrow(function() {
-  var s = new steam({
-    apiKey: '9FE25C516BE06DE9CBA1511C6EF0F1AD',
-  });
   s.getNewsForApp({
     appid: 440,
     count: 3,
