@@ -16,9 +16,9 @@ var steam = function(obj) {
   var validFormats = ['json', 'xml', 'vdf'];
   
   //error checking
-  if (!obj.apiKey) throw new Error('no API key specified');
+  if (!obj.apiKey || typeof obj.apiKey != 'string') throw new Error('invalid or missing API key');
   if (obj.format) {
-    if (validFormats.indexOf(obj.format)) {
+    if (validFormats.indexOf(obj.format)>-1) {
       this.format = obj.format;
     }
     else {
@@ -48,6 +48,8 @@ steam.prototype.getGlobalAchievementPercentagesForApp = function(obj) {
 }
 steam.prototype.getPlayerSummaries = function(obj) {
   this.validate(obj, 'getPlayerSummaries');
+  //turn the array into a comma separated list
+  if (typeof obj.steamids == 'object') obj.steamids = obj.steamids.join(',');
   obj.path = '/ISteamUser/GetPlayerSummaries/v0002/?',
   this.makeRequest(obj)
 }
@@ -70,14 +72,34 @@ steam.prototype.validate = function(obj, method) {
   if (typeof obj.callback != 'function') throw new Error('invalid callback');
   
   switch(method) {
+    case 'getNewsForApp':
+      if ( typeof obj.appid != 'string' && typeof obj.appid != 'number') throw new Error('invalid appid');
+      if ( typeof obj.count != 'string' && typeof obj.count != 'number') throw new Error('invalid count');
+      if ( typeof obj.maxlength != 'string' && typeof obj.maxlength != 'number') throw new Error('invalid maxlength');
+      break;
     case 'getGlobalAchievementPercentagesForApp':
-      if (!obj.gameid) throw new Error('invalid gameid');
+      if ( typeof obj.gameid != 'string' && typeof obj.gameid != 'number') throw new Error('invalid gameid');
       break;
     case 'getPlayerSummaries':
       if (!obj.steamids) throw new Error('invalid steamids');
+      if (typeof obj.steamids == 'object' && !obj.steamids.length) {
+        throw new Error('getPlayerSummaries steamids only accepts a string or array of strings');
+      }
+      if (typeof obj.steamids == 'object' && obj.steamids.length > 100) throw new Error('too many steamids');
       break;
     case 'getSchema':
-      if (!obj.gameid) throw new Error('invalid gameid');
+      if (!obj.gameid || (typeof obj.gameid != 'string' && typeof obj.gameid != 'number')) {
+        throw new Error('invalid gameid');
+      }
+      break;
+    case 'getPlayerItems':
+      if (!obj.gameid || (typeof obj.gameid != 'string' && typeof obj.gameid != 'number')) {
+        throw new Error('invalid gameid');
+      }
+      if (typeof obj.steamid != 'string') {
+        throw new Error('getPlayerItems steamid argument only accepts a string');
+      }
+      break;
   }
 }
 
