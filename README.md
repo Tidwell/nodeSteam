@@ -4,7 +4,7 @@ A [node.js](http://github.com/joyent/node) wrapper for Valve's [Steam Web API](h
 
 Use of the API requires an API key, obtainable [here](http://steamcommunity.com/dev/apikey).  
   
-This implementation is not supported, endorsed, or created by Valve - I'm just a fan.  This is just a wrapper - all of valve's terms and conditions for using their API still apply, see the [http://steamcommunity.com/dev](steam community developer page) for additional information.
+This implementation is not supported, endorsed, or created by Valve - I'm just a fan.  This is just a wrapper - all of Calve's terms and conditions for using their API still apply, see the [Steam community developer page](http://steamcommunity.com/dev) for additional information.
 
 ## Installation
 
