@@ -44,32 +44,32 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
       appid: 440,
       count: 3,
       maxlength: 300,
-      callback: function(data) {
+      callback: function(err, data) {
         console.log(data);
       }
     })
     s.getGlobalAchievementPercentagesForApp({
       gameid: 440,
-      callback: function(data) {
+      callback: function(err, data) {
         console.log(data);
       }
     });
     s.getPlayerSummaries({
       steamids: ['76561198037414410', '76561197960435530'],
-      callback: function(data) {
+      callback: function(err, data) {
         console.log(data);
       }
     })
     s.getSchema({
       gameid: 440,
-      callback: function(data) {
+      callback: function(err, data) {
         console.log(data);
       }
     })
     s.getPlayerItems({
       gameid: 440,
       steamid: '76561197960435530',
-      callback: function(data) {
+      callback: function(err, data) {
         console.log(data);
       }
     })
