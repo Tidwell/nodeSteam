@@ -1,3 +1,5 @@
+var apiKey = 'XXXX'; //REPLACE WITH VALID KEY FOR TESTING
+
 var assert = require('assert');
 var steam = require('../lib/steam');
 
@@ -30,14 +32,15 @@ assert.throws(function() {
 
 
 var s = new steam({
-  apiKey: 'XXXX',
+  apiKey: apiKey,
 });
 //invalid getNewsForApp
 assert.throws(function() {
   s.getNewsForApp({
     count: 3,
     maxlength: 300,
-    callback: function(data) {
+    callback: function(err, data) {
+      if (err) throw new Error(err);
     }
   })
 }, Error, 'Incorrect appid to getNewsForApp did not throw error');
@@ -45,7 +48,8 @@ assert.throws(function() {
   s.getNewsForApp({
     appid: 400,
     maxlength: 300,
-    callback: function(data) {
+    callback: function(err, data) {
+      if (err) throw new Error(err);
     }
   })
 }, Error, 'Incorrect count to getNewsForApp did not throw error');
@@ -53,7 +57,8 @@ assert.throws(function() {
   s.getNewsForApp({
     appid: 400,
     count: 300,
-    callback: function(data) {
+    callback: function(err, data) {
+      if (err) throw new Error(err);
     }
   })
 }, Error, 'Incorrect maxlength to getNewsForApp did not throw error');
@@ -61,7 +66,8 @@ assert.throws(function() {
 //invalid getGlobalAchievementPercentagesForApp
 assert.throws(function() {
   s.getGlobalAchievementPercentagesForApp({
-    callback: function(data) {
+    callback: function(err,data) {
+      if (err) throw new Error(err);
     }
   })
 }, Error, 'Incorrect gameid to getGlobalAchievementPercentagesForApp did not throw error');
@@ -69,13 +75,15 @@ assert.throws(function() {
 //invalid getPlayerSummaries
 assert.throws(function() {
   s.getPlayerSummaries({
-    callback: function(data) {
+    callback: function(err, data) {
+      if (err) throw new Error(err);
     }
   })
 }, Error, 'Incorrect steamids to getGlobalAchievementPercentagesForApp did not throw error');
 assert.throws(function() {
   s.getPlayerSummaries({
-    callback: function(data) {
+    callback: function(err, data) {
+      if (err) throw new Error(err);
     },
     steamids: {}
   })
@@ -84,7 +92,8 @@ assert.throws(function() {
 //invalid getSchema
 assert.throws(function() {
   s.getSchema({
-    callback: function(data) {
+    callback: function(err, data) {
+      if (err) throw new Error(err);
     },
     gameid: []
   })
@@ -93,7 +102,8 @@ assert.throws(function() {
 //invalid getPlayerItems
 assert.throws(function() {
   s.getPlayerItems({
-    callback: function(data) {
+    callback: function(err,data) {
+      if (err) throw new Error(err);
     },
     gameid: [],
     steamid: '76561197960435530'
@@ -101,7 +111,8 @@ assert.throws(function() {
 }, Error, 'Incorrect gameid to getPlayerItems did not throw error');
 assert.throws(function() {
   s.getPlayerItems({
-    callback: function(data) {
+    callback: function(err,data) {
+      if (err) throw new Error(err);
     },
     gameid: 440,
     steamid: ['']
@@ -115,31 +126,31 @@ assert.doesNotThrow(function() {
     appid: 440,
     count: 3,
     maxlength: 300,
-    callback: function(data) {
+    callback: function(err,data) {
       assert.ok(data, 'No data returned from getNewsForApp');
     }
   })
   s.getGlobalAchievementPercentagesForApp({
-    callback: function(data) {
+    callback: function(err,data) {
       assert.ok(data, 'No data returned for getGlobalAchievementPercentagesForApp');
     },
     gameid: 440
   });
   s.getPlayerSummaries({
-    callback: function(data) {
+    callback: function(err,data) {
       assert.ok(data, 'No data returned for getPlayerSummaries');
     },
     steamids: ['76561198037414410', '76561197960435530']  //ids have to be strings
   })
   s.getSchema({
     gameid: 440,
-    callback: function(data) {
+    callback: function(err,data) {
       assert.ok(data, 'No data returned for getSchma');
     }
   })
   s.getPlayerItems({
     gameid: 440,
-    callback: function(data) {
+    callback: function(err,data) {
       assert.ok(data, 'No data returned for getPlayerItems');
     },
     steamid: '76561197960435530'
