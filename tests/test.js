@@ -119,6 +119,15 @@ assert.throws(function() {
   })
 }, Error, 'Incorrect steamid to getPlayerItems did not throw error');
 
+s.getPlayerItems({
+  gameid: 440,
+  callback: function(err,data) {
+     if (!err) throw new Error('getPlayerItems with a bad steamid did not return an error');
+  },
+  steamid: '765611979ffffff60435530'
+})
+
+
 
 /*Correctly implimented*/
 assert.doesNotThrow(function() {
@@ -127,17 +136,20 @@ assert.doesNotThrow(function() {
     count: 3,
     maxlength: 300,
     callback: function(err,data) {
+      if (err) throw new Error(err);
       assert.ok(data, 'No data returned from getNewsForApp');
     }
   })
   s.getGlobalAchievementPercentagesForApp({
     callback: function(err,data) {
+      if (err) throw new Error(err);
       assert.ok(data, 'No data returned for getGlobalAchievementPercentagesForApp');
     },
     gameid: 440
   });
   s.getPlayerSummaries({
     callback: function(err,data) {
+      if (err) throw new Error(err);
       assert.ok(data, 'No data returned for getPlayerSummaries');
     },
     steamids: ['76561198037414410', '76561197960435530']  //ids have to be strings
@@ -145,12 +157,14 @@ assert.doesNotThrow(function() {
   s.getSchema({
     gameid: 440,
     callback: function(err,data) {
+      if (err) throw new Error(err);
       assert.ok(data, 'No data returned for getSchma');
     }
   })
   s.getPlayerItems({
     gameid: 440,
     callback: function(err,data) {
+      if (err) throw new Error(err);
       assert.ok(data, 'No data returned for getPlayerItems');
     },
     steamid: '76561197960435530'
