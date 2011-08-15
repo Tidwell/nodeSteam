@@ -73,3 +73,11 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
         console.log(data);
       }
     })
+
+
+## Changes
+
+####0.1.2
+* Changed requirements to node >= 0.4.0
+* Modified API so first argument of all callbacks is err (to correspond with standard practices)
+* Additional error handling (though methods will return empty arrays if invalid ids are sent to steam
