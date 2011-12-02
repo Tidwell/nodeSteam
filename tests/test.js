@@ -1,4 +1,4 @@
-var apiKey = 'XXXX'; //REPLACE WITH VALID KEY FOR TESTING
+var apiKey = '9FE25C516BE06DE9CBA1511C6EF0F1AD'; //REPLACE WITH VALID KEY FOR TESTING
 
 var assert = require('assert');
 var steam = require('../lib/steam');
@@ -128,7 +128,7 @@ s.getPlayerItems({
 })
 
 
-
+var log = require('logging');
 /*Correctly implimented*/
 assert.doesNotThrow(function() {
   s.getNewsForApp({
@@ -154,6 +154,15 @@ assert.doesNotThrow(function() {
     },
     steamids: ['76561198037414410', '76561197960435530']  //ids have to be strings
   })
+  s.getFriendList({
+    steamid: '76561197960435530',  //ids have to be strings
+    relationship: 'all', //all or friend
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+      log(data);
+      assert.ok(data, 'No data returned for getPlayerSummaries');
+    },
+  })
   s.getSchema({
     gameid: 440,
     callback: function(err,data) {
@@ -169,4 +178,23 @@ assert.doesNotThrow(function() {
     },
     steamid: '76561197960435530'
   })
+  s.getAssetPrices({
+    appid: 440,
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+      assert.ok(data, 'No data returned for getAssetPrices');
+    }
+  })
+  /*
+s.getAssetClassInfo({
+    appid: 440,
+    classid: '16891096',
+    class_count: 1,
+    callback: function(err,data) {
+      log(err,data);
+      if (err) throw new Error(err);
+      assert.ok(data, 'No data returned for getAssetClassInfo');
+    }
+  })
+*/
 },Error, 'Failed during correct implimentation');
