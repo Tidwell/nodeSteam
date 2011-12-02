@@ -76,6 +76,8 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 
 ## Changes
+####12/1/2011 Patch
+Confirmed passes tests after API update, please file any issues
 
 ####0.1.2
 * Changed requirements to node >= 0.4.0
