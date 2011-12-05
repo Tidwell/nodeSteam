@@ -26,11 +26,19 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 ####getPlayerSummaries
 
 
+####getFriendList
+
+
 ####getSchema
 
 
 ####getPlayerItems
 
+
+####getAssetPrices
+
+
+####getAssetClassInfo
 
 ## Usage
 
@@ -40,6 +48,7 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
       apiKey: 'XXXXXXXXXXXXXXXX',
       format: 'json' //optional ['json', 'xml', 'vdf']
     });
+    
     s.getNewsForApp({
       appid: 440,
       count: 3,
@@ -60,6 +69,13 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
         console.log(data);
       }
     })
+    s.getFriendList({
+      steamid: '76561197960435530',
+      relationship: 'all', //'all' or 'friend'
+      callback: function(err,data) {
+        console.log(data);
+      },
+    })
     s.getSchema({
       gameid: 440,
       callback: function(err, data) {
@@ -73,11 +89,49 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
         console.log(data);
       }
     })
+    s.getAssetPrices({
+      appid: 440,  //can also use gameid instead for convenience
+      callback: function(err,data) {
+        console.log(data);
+      }
+    })
+    
+    There are two ways to use getAssetClassInfo.  By default, the Steam API 
+    wants a query string formatted as: ?classid0=1234&classid1=5678&class_count=2
+    
+    As such, you can either manually generate the keys and call the method like this:
+    
+    s.getAssetClassInfo({
+      appid: 440, //can also use gameid instead for convenience
+      classid0: '16891096',
+      classid1: 151,
+      class_count: 2,
+      callback: function(err,data) {
+        console.log(data);
+      }
+    })
+    
+    OR, I've provided a convenience property so you can just pass an array of ids
+    (when using the convenience property, you don't need to pass class_count either)
+    
+    s.getAssetClassInfo({
+      appid: 440, //can also use gameid instead for convenience
+      classIds: ['16891096',151],
+      callback: function(err,data) {
+        console.log(data);
+      }
+    })
+    
+    
+
 
 
 ## Changes
-####12/1/2011 Patch
-Confirmed passes tests after API update, please file any issues
+
+####0.1.3
+* Implemented new API methods from 12/1/2011 update: getAssetClassInfo, getAssetPrices, and getFriendList
+* Fixed bug where callbacks were fired twice for certain error events
+* Added convenience property to getAssetClassInfo (classIds instead of forcing manual property generation) 
 
 ####0.1.2
 * Changed requirements to node >= 0.4.0
