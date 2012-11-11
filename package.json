@@ -1,6 +1,6 @@
 {
     "name": "steam-web",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "A wrapper for the Steam Web API.",
     "keywords": ["steam", "team fortress 2"],
     "author": "Aaron Tidwell <aaron.tidwell@gmail.com>",

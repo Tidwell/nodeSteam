@@ -128,8 +128,8 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 ## Changes
 
-####0.2.0
-* Changed npm module to steam-web to allow https://github.com/seishun/node-steam to use steam npm module name, update your dependancies.
+####0.2.1
+* Changed npm module to steam-web to allow https://github.com/seishun/node-steam to use steam npm module name, update your dependencies.
 
 ####0.1.3
 * Implemented new API methods from 12/1/2011 update: getAssetClassInfo, getAssetPrices, and getFriendList
