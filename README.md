@@ -2,20 +2,20 @@
 
 A [node.js](http://github.com/joyent/node) wrapper for Valve's [Steam Web API](http://developer.valvesoftware.com/wiki/Steam_Web_API).  Also supports the methods provided for [TF2/TF2Beta/Portal](http://wiki.teamfortress.com/wiki/WebAPI).
 
-Use of the API requires an API key, obtainable [here](http://steamcommunity.com/dev/apikey).  
-  
+Use of the API requires an API key, obtainable [here](http://steamcommunity.com/dev/apikey).
+
 This implementation is not supported, endorsed, or created by Valve - I'm just a fan.  This is just a wrapper - all of Valve's terms and conditions for using their API still apply, see the [Steam community developer page](http://steamcommunity.com/dev) for additional information.
 
 ## Installation
 
-  npm install steam
-  
+  npm install steam-web
+
 
 ### Methods
 
   All methods accept a single options object.  The key names match the query string parameters specified in the valve documentation. (Additional docs coming soon.  For now, see usage and the valve documentation for any questions).
-  
-  If using JSON for results (default), the result will automatically be parsed into a json object before being passed to the callback.  Any other formats will return the raw data (xml or vdf).  
+
+  If using JSON for results (default), the result will automatically be parsed into a json object before being passed to the callback.  Any other formats will return the raw data (xml or vdf).
 
 ####getNewsForApp
 
@@ -43,12 +43,12 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 ## Usage
 
     var steam = require('steam');
-    
+
     var s = new steam({
       apiKey: 'XXXXXXXXXXXXXXXX',
       format: 'json' //optional ['json', 'xml', 'vdf']
     });
-    
+
     s.getNewsForApp({
       appid: 440,
       count: 3,
@@ -95,12 +95,12 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
         console.log(data);
       }
     })
-    
-    There are two ways to use getAssetClassInfo.  By default, the Steam API 
+
+    There are two ways to use getAssetClassInfo.  By default, the Steam API
     wants a query string formatted as: ?classid0=1234&classid1=5678&class_count=2
-    
+
     As such, you can either manually generate the keys and call the method like this:
-    
+
     s.getAssetClassInfo({
       appid: 440, //can also use gameid instead for convenience
       classid0: '16891096',
@@ -110,10 +110,10 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
         console.log(data);
       }
     })
-    
+
     OR, I've provided a convenience property so you can just pass an array of ids
     (when using the convenience property, you don't need to pass class_count either)
-    
+
     s.getAssetClassInfo({
       appid: 440, //can also use gameid instead for convenience
       classIds: ['16891096',151],
@@ -121,17 +121,20 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
         console.log(data);
       }
     })
-    
-    
+
+
 
 
 
 ## Changes
 
+####0.2.0
+* Changed npm module to steam-web to allow https://github.com/seishun/node-steam to use steam npm module name, update your dependancies.
+
 ####0.1.3
 * Implemented new API methods from 12/1/2011 update: getAssetClassInfo, getAssetPrices, and getFriendList
 * Fixed bug where callbacks were fired twice for certain error events
-* Added convenience property to getAssetClassInfo (classIds instead of forcing manual property generation) 
+* Added convenience property to getAssetClassInfo (classIds instead of forcing manual property generation)
 
 ####0.1.2
 * Changed requirements to node >= 0.4.0
