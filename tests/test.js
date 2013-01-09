@@ -127,6 +127,35 @@ s.getPlayerItems({
   steamid: '765611979ffffff60435530'
 })
 
+//invalid getPlayerAchievements
+assert.throws(function() {
+  s.getPlayerAchievements({
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+    },
+    gameid: [],
+    steamid: '76561197960435530'
+  })
+}, Error, 'Incorrect gameid to getPlayerAchievements did not throw error');
+assert.throws(function() {
+  s.getPlayerAchievements({
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+    },
+    gameid: 440,
+    steamid: ['']
+  })
+}, Error, 'Incorrect steamid to getPlayerAchievements did not throw error');
+assert.throws(function() {
+  s.getPlayerAchievements({
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+    },
+    gameid: 440,
+    steamid: '76561197960435530',
+    l: ['']
+  })
+}, Error, 'Incorrect language to getPlayerAchievements did not throw error');
 
 /*Correctly implimented*/
 assert.doesNotThrow(function() {
@@ -208,6 +237,16 @@ assert.doesNotThrow(function() {
       if (err) throw new Error(err);
       assert.ok(data, 'No data returned for getAssetClassInfo');
     }
+  })
+  s.getPlayerAchievements({
+    gameid: 440,
+    steamid: '76561197960435530',
+    l: 'en',
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+      assert.ok(data, 'No data returned for getPlayerItems');
+    },
+    steamid: '76561197960435530'
   })
 
 },Error, 'Failed during correct implimentation');
