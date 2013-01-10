@@ -42,7 +42,7 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 ## Usage
 
-    var steam = require('steam');
+    var steam = require('steam-web');
 
     var s = new steam({
       apiKey: 'XXXXXXXXXXXXXXXX',
