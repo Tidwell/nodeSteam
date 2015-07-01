@@ -1,4 +1,4 @@
-var apiKey = 'XXXX'; //REPLACE WITH VALID KEY FOR TESTING
+var apiKey = '9FE25C516BE06DE9CBA1511C6EF0F1AD'; //REPLACE WITH VALID KEY FOR TESTING
 
 var assert = require('assert');
 var steam = require('../lib/steam');
@@ -156,6 +156,13 @@ assert.throws(function() {
     l: ['']
   })
 }, Error, 'Incorrect language to getPlayerAchievements did not throw error');
+assert.throws(function() {
+  s.getRecentlyPlayedGames({
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+    }
+  })
+}, Error, 'No steamid to getRecentlyPlayedGames did not throw error');
 
 /*Correctly implimented*/
 assert.doesNotThrow(function() {
@@ -203,7 +210,7 @@ assert.doesNotThrow(function() {
       if (err) throw new Error(err);
       assert.ok(data, 'No data returned for getPlayerItems');
     },
-    steamid: '76561197960435530'
+    steamid: '76561197993520601'
   })
   s.getAssetPrices({
     appid: 440,
@@ -245,8 +252,15 @@ assert.doesNotThrow(function() {
     callback: function(err,data) {
       if (err) throw new Error(err);
       assert.ok(data, 'No data returned for getPlayerItems');
-    },
-    steamid: '76561197960435530'
+    }
   })
+  s.getRecentlyPlayedGames({
+    steamid: '76561197960435530',
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+      assert.ok(data, 'No data returned for getRecentlyPlayedGames');
+    }
+  })
+
 
 },Error, 'Failed during correct implimentation');

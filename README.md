@@ -13,7 +13,7 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 ### Methods
 
-  All methods accept a single options object.  The key names match the query string parameters specified in the valve documentation. (Additional docs coming soon.  For now, see usage and the valve documentation for any questions).
+  All methods accept a single options object.  The key names match the query string parameters specified in the valve documentation. See usage and the valve documentation for any additional params.
 
   If using JSON for results (default), the result will automatically be parsed into a json object before being passed to the callback.  Any other formats will return the raw data (xml or vdf).
 
@@ -39,6 +39,15 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 
 ####getAssetClassInfo
+
+
+####getPlayerAchievements
+
+
+####getRecentlyPlayedGames
+
+
+####getOwnedGames
 
 ## Usage
 
@@ -95,6 +104,26 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
         console.log(data);
       }
     })
+    s.getPlayerAchievements({
+      gameid: 440,
+      steamid: '76561197960435530',
+      l: 'en',
+      callback: function(err,data) {
+        console.log(data);
+      }
+    })
+    s.getRecentlyPlayedGames({
+      steamid: '76561197960435530',
+      callback: function(err,data) {
+        console.log(data)
+      }
+    })
+    s.getOwnedGames({
+      steamid: '76561197960435530',
+      callback: function(err,data) {
+        console.log(data)
+      }
+    })
 
     There are two ways to use getAssetClassInfo.  By default, the Steam API
     wants a query string formatted as: ?classid0=1234&classid1=5678&class_count=2
@@ -123,10 +152,14 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
     })
 
 
-
-
-
 ## Changes
+
+####0.2.2
+* Added getOwnedGames
+* Added getRecentlyPlayedGames
+* Add getPlayerAchievements method
+* Add an error handler to the HTTP get request. This will capture ETIMEDOUT and other connections errors.
+* Updated README and tests with new methods
 
 ####0.2.1
 * Changed npm module to steam-web to allow https://github.com/seishun/node-steam to use steam npm module name, update your dependencies.
