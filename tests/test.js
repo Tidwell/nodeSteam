@@ -1,4 +1,4 @@
-var apiKey = '9FE25C516BE06DE9CBA1511C6EF0F1AD'; //REPLACE WITH VALID KEY FOR TESTING
+var apiKey = ''; //REPLACE WITH VALID KEY FOR TESTING
 
 var assert = require('assert');
 var steam = require('../lib/steam');

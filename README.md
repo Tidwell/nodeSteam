@@ -154,7 +154,7 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 ## Changes
 
-####0.2.2
+####0.2.3
 * Added getOwnedGames
 * Added getRecentlyPlayedGames
 * Add getPlayerAchievements method
