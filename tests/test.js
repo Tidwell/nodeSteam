@@ -261,6 +261,14 @@ assert.doesNotThrow(function() {
       assert.ok(data, 'No data returned for getRecentlyPlayedGames');
     }
   })
+  s.getUserStatsForGame({
+    steamid: '76561197963506690',
+    appid: 730,
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+      assert.ok(data, 'No data returned for getUserStatsForGame');
+    }
+  })
 
 
 },Error, 'Failed during correct implimentation');
