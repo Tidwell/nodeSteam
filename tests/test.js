@@ -1,4 +1,8 @@
-var apiKey = ''; //REPLACE WITH VALID KEY FOR TESTING
+/*
+  UPDATE KEY.JS FOR TESTING
+*/
+var apiKey = require('./key.js');
+if (apiKey === 'xxxxxx') { throw new  Error('Must provide key in ./test/key.js'); }
 
 var assert = require('assert');
 var steam = require('../lib/steam');

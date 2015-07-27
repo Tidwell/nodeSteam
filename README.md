@@ -47,6 +47,9 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 ####getRecentlyPlayedGames
 
 
+####getUserStatsForGame
+
+
 ####getOwnedGames
 
 ## Usage
@@ -124,6 +127,13 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
         console.log(data)
       }
     })
+    s.getUserStatsForGame({
+      steamid: '76561197963506690',
+      appid: 730,
+      callback: function(err,data) {
+        console.log(data);
+      }
+    })
 
     There are two ways to use getAssetClassInfo.  By default, the Steam API
     wants a query string formatted as: ?classid0=1234&classid1=5678&class_count=2
@@ -153,6 +163,10 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 
 ## Changes
+
+####0.2.4
+* Added getUserStatsForGame
+* Updated README and tests, added gitignore
 
 ####0.2.3
 * Added getOwnedGames
