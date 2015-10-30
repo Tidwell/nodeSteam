@@ -164,6 +164,10 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 ## Changes
 
+####0.2.5
+* Added error handling for invalid api keys
+* Added tests and README
+
 ####0.2.4
 * Added getUserStatsForGame
 * Updated README and tests, added gitignore

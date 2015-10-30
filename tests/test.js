@@ -168,6 +168,19 @@ assert.throws(function() {
   })
 }, Error, 'No steamid to getRecentlyPlayedGames did not throw error');
 
+//passing in an invalid key should not throw when a request is made
+assert.doesNotThrow(function() {
+  var s = new steam({
+      apiKey: 'badKey'
+  });
+  s.getPlayerSummaries({
+    callback: function(err,data) {
+      //no error, were good
+    },
+    steamids: ['76561198037414410', '76561197960435530']
+  });
+}, Error, 'Incorrect key threw error on a request');
+
 /*Correctly implimented*/
 assert.doesNotThrow(function() {
   s.getNewsForApp({
