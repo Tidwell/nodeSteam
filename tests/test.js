@@ -9,29 +9,29 @@ var steam = require('../lib/steam');
 
 //forgetting to pass in apiKey
 assert.throws(function() {
-  var q = new steam(); 
+  var q = new steam();
 }, Error, 'Incorrect construction did not throw error');
 //passing in somethign that isn't a string as an apiKey
 assert.throws(function() {
   var q = new steam({
     apiKey: ['asdf', 'asdf'],
     format: 'json'
-  }); 
+  });
 }, Error, 'Incorrect apiKey data type did not throw error');
 
 //invalid format
 assert.throws(function() {
-  var q = new steam({ 
+  var q = new steam({
     apiKey: 'XXXX',
     format: 'qwe'
-  }); 
+  });
 }, Error, 'Incorrect format did not throw error');
 //invalid format data type
 assert.throws(function() {
   var q = new steam({
     apiKey: 'XXXX',
     format: ['qwe', 'asdf']
-  }); 
+  });
 }, Error, 'Incorrect format data type did not throw error');
 
 
@@ -126,7 +126,7 @@ assert.throws(function() {
 s.getPlayerItems({
   gameid: 440,
   callback: function(err,data) {
-     if (!err) throw new Error('getPlayerItems with a bad steamid did not return an error');
+     if (err) throw new Error('getPlayerItems with a bad steamid did not return an error');
   },
   steamid: '765611979ffffff60435530'
 })
@@ -179,7 +179,7 @@ assert.doesNotThrow(function() {
     },
     steamids: ['76561198037414410', '76561197960435530']
   });
-}, Error, 'Incorrect key threw error on a request');
+});
 
 /*Correctly implimented*/
 assert.doesNotThrow(function() {
@@ -255,7 +255,7 @@ assert.doesNotThrow(function() {
     }
   })
   s.getAssetClassInfo({
-    appid: 440, 
+    appid: 440,
     classIds: ['16891096',156],//testing convenience property
     callback: function(err,data) {
       if (err) throw new Error(err);
@@ -279,13 +279,43 @@ assert.doesNotThrow(function() {
     }
   })
   s.getUserStatsForGame({
-    steamid: '76561197963506690',
+    steamid: '76561198120639625',
     appid: 730,
     callback: function(err,data) {
       if (err) throw new Error(err);
       assert.ok(data, 'No data returned for getUserStatsForGame');
     }
   })
+  s.getGlobalStatsForGame({
+    appid: 17740,
+    name: "global.map.emp_isle",
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+      assert.ok(data, 'No data returned for getGlobalStatsForGame');
+    }
+  })
+  s.isPlayingSharedGame({
+    steamid: '76561198120639625',
+    appid_playing: 730,
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+      assert.ok(data, 'No data returned for isPlayingSharedGame');
+    }
+  })
+  s.getSchemaForGame({
+    appid: 730,
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+      assert.ok(data, 'No data returned for getSchemaForGame');
+    }
+  })
+  s.getPlayerBans({
+    steamids: '76561198120639625',
+    callback: function(err,data) {
+      if (err) throw new Error(err);
+      assert.ok(data, 'No data returned for getPlayerBans');
+    }
+  })
 
 
-},Error, 'Failed during correct implimentation');
+});
