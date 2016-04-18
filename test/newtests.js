@@ -155,7 +155,6 @@ describe("Method object validation", function() {
           appid: 440,
           steamid: '76123131232313123112',
           callback: function(err,data) {
-            console.log(err);
             if (err) throw new Error(err);
           }
         });
@@ -236,7 +235,6 @@ describe("Request handling", function() {
     });
     var obj = {
       callback: function(err, data) {
-        console.log(data);
         assert.strictEqual(err, "404 Error was returned from steam API");
         done();
       },
