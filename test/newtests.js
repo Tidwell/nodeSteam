@@ -145,7 +145,7 @@ describe("Method object validation", function() {
             if (err) throw new Error(err);
           },
           gameid: 440,
-          steamid: ['']
+          steamid: {}
         });
       });
     });
@@ -236,27 +236,31 @@ describe("Request handling", function() {
     });
     var obj = {
       callback: function(err, data) {
+        console.log(data);
         assert.strictEqual(err, "404 Error was returned from steam API");
         done();
       },
-      path: "/some/bad/path",
+      path: "/some/bad/path/?",
     };
     Steam.prototype.makeRequest(obj);
   });
 
   it("querying with an invalid API key should warn of 403", function(done) {
-    var s = new Steam({
+    var s = {
       apiKey: "somebadkey",
       format: "json"
-    });
-    s.getPlayerSummaries({
-      steamids: ['76561198037414410', '76561197960435530'],
-      callback: function(err,data) {
-        if(err) console.log(err);
+    };
+    var obj = {
+      appid: 440,
+      count: 3,
+      maxlength: 300,
+      callback: function(err, data) {
         assert.strictEqual(err, "403 Error: Check your API key is correct");
         done();
-      }
-    });
+      },
+      path: "/IEconItems_440/GetSchema/v0001/?"
+    };
+    Steam.prototype.makeRequest.call(s, obj);
   });
 });
 

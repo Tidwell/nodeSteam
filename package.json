@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "oldtest": "node test/test.js",
-    "test": "./node_modules/.bin/mocha --timeout 5000"
+    "test": "mocha ./test/newtests.js --timeout 5000"
   },
   "devDependencies": {
     "chai": "^3.5.0",
