@@ -52,6 +52,18 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 ####getOwnedGames
 
+
+####getGlobalStatsForGame
+
+
+####isPlayingSharedGame
+
+
+####getSchemaForGame
+
+
+####getPlayerBans
+
 ## Usage
 
     var steam = require('steam-web');
@@ -133,6 +145,33 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
       callback: function(err,data) {
         console.log(data);
       }
+    })
+    s.getGlobalStatsForGame({
+        appid: 17740,
+        name: ["global.map.emp_isle"], // can also pass a single string
+        count: 1, // or you can let the module work it out for you
+        callback: function(err,data) {
+            console.log(data);
+        }
+    })
+    s.isPlayingSharedGame({
+        steamid: '76561198120639625',
+        appid_playing: 730,
+        callback: function(err,data) {
+          console.log(data);
+        }
+    })
+    s.getSchemaForGame({
+        appid: 730,
+        callback: function(err,data) {
+          console.log(data);
+        }
+    })
+    s.getPlayerBans({
+        steamids: ['76561198120639625'], // can also pass a single string
+        callback: function(err,data) {
+          console.log(data);
+        }
     })
 
     There are two ways to use getAssetClassInfo.  By default, the Steam API
