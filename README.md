@@ -203,6 +203,15 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 ## Changes
 
+####0.3.0
+* Added getGlobalStatsForGame
+* Added isPlayingSharedGame
+* Added getSchemaForGame
+* Added getPlayerBans
+* Replaced tests with chai/mocha
+* Updated Readme
+* Added AUTHORS file
+
 ####0.2.5
 * Added error handling for invalid api keys
 * Added tests and README

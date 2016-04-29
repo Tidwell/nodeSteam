@@ -1,6 +1,6 @@
 {
   "name": "steam-web",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "A wrapper for the Steam Web API.",
   "keywords": [
     "steam",
@@ -19,8 +19,7 @@
     "node >= 0.4.0"
   ],
   "scripts": {
-    "oldtest": "node ./test/test.js",
-    "test": "./node_modules/mocha/bin/mocha ./test/newtests.js --timeout 5000"
+    "test": "./node_modules/mocha/bin/mocha ./test/newtests.js --timeout 10000"
   },
   "devDependencies": {
     "chai": "^3.5.0",
