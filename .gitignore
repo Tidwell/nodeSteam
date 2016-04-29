@@ -1,1 +1,2 @@
-tests/key.js
+test/key.js
+node_modules/
