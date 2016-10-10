@@ -2,6 +2,7 @@ var assert = require("chai").assert;
 var Steam = require("../lib/steam");
 
 var APIKEY = require('./key.js');
+if (!APIKEY) { APIKEY = process.env.STEAMAPIKEY; }
 if (APIKEY === 'xxxxxx') { throw new  Error('Must provide key in ./test/key.js'); }
 
 describe("Steam instance creator", function() {
