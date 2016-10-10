@@ -440,6 +440,119 @@ describe("Successful Data Return", function() {
       }); }
     });
   });
+
+  it("GetServersAtAddress", function(done) {
+    s.getServersAtAddress({
+      addr: '193.192.58.116',
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("UpToDateCheck", function(done) {
+    s.upToDateCheck({
+      version: 100,
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("GetUserGroupList", function(done) {
+    s.getUserGroupList({
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("ResolveVanityURL", function(done) {
+    s.resolveVanityURL({
+      vanityurl: 'vincegogh',
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("GetNumberOfCurrentPlayers", function(done) {
+    s.getNumberOfCurrentPlayers({
+      appid: 440,
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("GetSteamLevel", function(done) {
+    s.getSteamLevel({
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("GetBadges", function(done) {
+    s.getBadges({
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("GetCommunityBadgeProgress", function(done) {
+    s.getCommunityBadgeProgress({
+      badgeid: 2,
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("GetServerInfo", function(done) {
+    s.getServerInfo({
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("getSupportedAPIList", function(done) {
+    s.getSupportedAPIList({
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("getSchemaURL", function(done) {
+    s.getSchemaURL({
+      appid: 440,
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("getStoreMetadata", function(done) {
+    s.getStoreMetadata({
+      appid: 440,
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+  it("getStoreStatus", function(done) {
+    s.getStoreStatus({
+      appid: 440,
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
 });
 
 /* TEMPLATE:
