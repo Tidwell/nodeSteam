@@ -211,6 +211,19 @@ describe("Method object validation", function() {
     });
   });
 
+  describe('GetServersAtAddress', function() {
+    it("invalid ip address should throw", function() {
+      assert.throws(function() {
+        s.getServersAtAddress({
+          addr: '1.2.3',
+          callback: function(err, data) {
+            if (err) throw new Error(err);
+          }
+        });
+      });
+    });
+  });
+
 });
 
 describe("Request handling", function() {
@@ -441,6 +454,15 @@ describe("Successful Data Return", function() {
     });
   });
 
+  it("GetAppList", function(done) {
+    s.getAppList({
+      callback: function(err, data) { check(done, function() {
+        if (err) return err;
+        assert.isObject(data, "Data is not an object");
+      }); }
+    });
+  });
+
   it("GetServersAtAddress", function(done) {
     s.getServersAtAddress({
       addr: '193.192.58.116',
@@ -453,6 +475,7 @@ describe("Successful Data Return", function() {
   it("UpToDateCheck", function(done) {
     s.upToDateCheck({
       version: 100,
+      appid: 440,
       callback: function(err, data) { check(done, function() {
         if (err) return err;
         assert.isObject(data, "Data is not an object");
@@ -461,6 +484,7 @@ describe("Successful Data Return", function() {
   });
   it("GetUserGroupList", function(done) {
     s.getUserGroupList({
+      steamid: '76561197960435530',
       callback: function(err, data) { check(done, function() {
         if (err) return err;
         assert.isObject(data, "Data is not an object");
@@ -487,6 +511,7 @@ describe("Successful Data Return", function() {
   });
   it("GetSteamLevel", function(done) {
     s.getSteamLevel({
+      steamid: '76561197960435530',
       callback: function(err, data) { check(done, function() {
         if (err) return err;
         assert.isObject(data, "Data is not an object");
@@ -495,6 +520,7 @@ describe("Successful Data Return", function() {
   });
   it("GetBadges", function(done) {
     s.getBadges({
+      steamid: '76561197960435530',
       callback: function(err, data) { check(done, function() {
         if (err) return err;
         assert.isObject(data, "Data is not an object");
@@ -503,6 +529,7 @@ describe("Successful Data Return", function() {
   });
   it("GetCommunityBadgeProgress", function(done) {
     s.getCommunityBadgeProgress({
+      steamid: '76561197960435530',
       badgeid: 2,
       callback: function(err, data) { check(done, function() {
         if (err) return err;

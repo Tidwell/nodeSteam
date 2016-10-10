@@ -64,6 +64,49 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 ####getPlayerBans
 
+
+####getAppList
+
+
+####getServersAtAddress
+
+
+####upToDateCheck
+
+
+####getUserGroupList
+
+
+####resolveVanityURL
+
+
+####getNumberOfCurrentPlayers
+
+
+####getSteamLevel
+
+
+####getBadges
+
+
+####getCommunityBadgeProgress
+
+
+####getServerInfo
+
+
+####getSupportedAPIList
+
+
+####getSchemaURL
+
+
+####getStoreMetadata
+
+
+####getStoreStatus
+
+
 ## Usage
 
     var steam = require('steam-web');
@@ -173,6 +216,89 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
           console.log(data);
         }
     })
+    s.getAppList({
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })
+    s.getServersAtAddress({
+      addr: '193.192.58.116',
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })    
+    s.upToDateCheck({
+      version: 100,
+      appid: 440,
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })  
+    s.getUserGroupList({
+      steamid: '76561197960435530',
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })    
+    s.resolveVanityURL({
+      vanityurl: 'vincegogh',
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })  
+    s.getNumberOfCurrentPlayers({
+      appid: 440,
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })
+    s.getSteamLevel({
+      steamid: '76561197960435530',
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })    
+    s.getBadges({
+      steamid: '76561197960435530',
+      callback: function(err, data) {
+        console.log(data);   
+      }
+    })
+    s.getCommunityBadgeProgress({
+      steamid: '76561197960435530',
+      badgeid: 2,
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })  
+    s.getServerInfo({
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })    
+    s.getSupportedAPIList({
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })
+    s.getSchemaURL({
+      appid: 440,
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })    
+    s.getStoreMetadata({
+      appid: 440,
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })
+    s.getStoreStatus({
+      appid: 440,
+      callback: function(err, data) {
+        console.log(data);
+      }
+    })  
 
     There are two ways to use getAssetClassInfo.  By default, the Steam API
     wants a query string formatted as: ?classid0=1234&classid1=5678&class_count=2
@@ -189,7 +315,7 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
       }
     })
 
-    OR, I've provided a convenience property so you can just pass an array of ids
+    OR, we have provided a convenience property so you can just pass an array of ids
     (when using the convenience property, you don't need to pass class_count either)
 
     s.getAssetClassInfo({
@@ -202,6 +328,24 @@ This implementation is not supported, endorsed, or created by Valve - I'm just a
 
 
 ## Changes
+
+####0.4.0
+* Added getAppList
+* Added getServersAtAddress
+* Added upToDateCheck
+* Added getUserGroupList
+* Added resolveVanityURL
+* Added getNumberOfCurrentPlayers
+* Added getSteamLevel
+* Added getBadges
+* Added getCommunityBadgeProgress
+* Added getServerInfo
+* Added getSupportedAPIList
+* Added getSchemaURL
+* Added getStoreMetadata
+* Added getStoreStatus
+* Updated Readme and tests
+* Updated AUTHORS file
 
 ####0.3.0
 * Added getGlobalStatsForGame
