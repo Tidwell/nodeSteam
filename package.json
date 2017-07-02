@@ -19,10 +19,26 @@
     "node >= 0.4.0"
   ],
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha ./test/newtests.js --timeout 10000"
+    "test": "./node_modules/mocha/bin/mocha ./test/newtests.js --timeout 20000",
+
+    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha ./test/newtests.js -- --timeout 20000",
+    "format-lib": "./node_modules/jsfmt/bin/jsfmt -w ./lib ./*.js",
+    "format-spec": "./node_modules/jsfmt/bin/jsfmt -w ./test",
+    "format": "npm run-script format-lib && npm run-script format-spec",
+    "lint-lib": "./node_modules/jshint/bin/jshint ./lib",
+    "lint-spec": "./node_modules/jshint/bin/jshint ./test",
+    "lint": "npm run-script lint-lib && npm run-script lint-spec",
+    "integrate": "npm run-script test && npm run-script format && npm run-script lint",
+    "docs": "./node_modules/.bin/jsdoc -r ./lib -d ./docs --readme README.md -t ./node_modules/docdash",
+    "doc-deploy": "git subtree push --prefix docs origin gh-pages"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "docdash": "^0.4.0",
+    "istanbul": "^0.4.5",
+    "jsdoc": "^3.4.3",
+    "jsfmt": "^0.5.3",
+    "jshint": "^2.9.4"
   }
 }

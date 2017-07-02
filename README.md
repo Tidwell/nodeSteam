@@ -333,6 +333,28 @@ s.getAssetClassInfo({
 })
 ```
 
+### Run Tests
+[![Build Status](https://travis-ci.org/Tidwell/nodeSteam.svg?branch=master)](https://travis-ci.org/Tidwell/nodeSteam)
+
+```bash
+$ npm test
+```
+
+### Run JsFmt/JsHint
+
+```bash
+$ npm run format
+```
+
+```bash
+$ npm run lint
+```
+
+### All (travis integration tests)
+
+```bash
+$ npm run integrate
+```
 
 ## Changes
 

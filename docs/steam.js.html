@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>steam.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="steam.html">steam</a><ul class='methods'><li data-type='method'><a href="steam.html#getAppList">getAppList</a></li><li data-type='method'><a href="steam.html#getAssetClassInfo">getAssetClassInfo</a></li><li data-type='method'><a href="steam.html#getAssetPrices">getAssetPrices</a></li><li data-type='method'><a href="steam.html#getBadges">getBadges</a></li><li data-type='method'><a href="steam.html#getCommunityBadgeProgress">getCommunityBadgeProgress</a></li><li data-type='method'><a href="steam.html#getFriendList">getFriendList</a></li><li data-type='method'><a href="steam.html#getGlobalAchievementPercentagesForApp">getGlobalAchievementPercentagesForApp</a></li><li data-type='method'><a href="steam.html#getGlobalStatsForGame">getGlobalStatsForGame</a></li><li data-type='method'><a href="steam.html#getNewsForApp">getNewsForApp</a></li><li data-type='method'><a href="steam.html#getNumberOfCurrentPlayers">getNumberOfCurrentPlayers</a></li><li data-type='method'><a href="steam.html#getOwnedGames">getOwnedGames</a></li><li data-type='method'><a href="steam.html#getPlayerAchievements">getPlayerAchievements</a></li><li data-type='method'><a href="steam.html#getPlayerBans">getPlayerBans</a></li><li data-type='method'><a href="steam.html#getPlayerItems">getPlayerItems</a></li><li data-type='method'><a href="steam.html#getPlayerSummaries">getPlayerSummaries</a></li><li data-type='method'><a href="steam.html#getRecentlyPlayedGames">getRecentlyPlayedGames</a></li><li data-type='method'><a href="steam.html#getSchema">getSchema</a></li><li data-type='method'><a href="steam.html#getSchemaForGame">getSchemaForGame</a></li><li data-type='method'><a href="steam.html#getSchemaURL">getSchemaURL</a></li><li data-type='method'><a href="steam.html#getServerInfo">getServerInfo</a></li><li data-type='method'><a href="steam.html#getServersAtAddress">getServersAtAddress</a></li><li data-type='method'><a href="steam.html#getSteamLevel">getSteamLevel</a></li><li data-type='method'><a href="steam.html#getStoreMetadata">getStoreMetadata</a></li><li data-type='method'><a href="steam.html#getStoreStatus">getStoreStatus</a></li><li data-type='method'><a href="steam.html#getSupportedAPIList">getSupportedAPIList</a></li><li data-type='method'><a href="steam.html#getUserGroupList">getUserGroupList</a></li><li data-type='method'><a href="steam.html#getUserStatsForGame">getUserStatsForGame</a></li><li data-type='method'><a href="steam.html#isPlayingSharedGame">isPlayingSharedGame</a></li><li data-type='method'><a href="steam.html#makeRequest">makeRequest</a></li><li data-type='method'><a href="steam.html#normalizeAppGameId">normalizeAppGameId</a></li><li data-type='method'><a href="steam.html#resolveVanityURL">resolveVanityURL</a></li><li data-type='method'><a href="steam.html#upToDateCheck">upToDateCheck</a></li><li data-type='method'><a href="steam.html#validate">validate</a></li><li data-type='method'><a href="steam.html#validateIPv4">validateIPv4</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">steam.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var http = require('http');
+var qs = require('qs');
+
+/**
+ * Creates a new Steam Web instance
+ * @param {object} settings
+ * @param {string} settings.apiKey The steam web API key, obtained from: http://steamcommunity.com/dev/apikey
+ * @param {string} [settings.format=json] The format for the response [json, xml, vdf] - default: json
+ * @constructor
+ */
+var steam = function(obj) {
+  var validFormats = ['json', 'xml', 'vdf'];
+
+  // Error checking
+  if (typeof obj != 'object') throw new Error('invalid options passed to constructor');
+  if (typeof obj.apiKey == 'undefined' || typeof obj.apiKey != 'string') throw new Error('invalid or missing API key');
+  if (obj.format) {
+    if (validFormats.indexOf(obj.format)>-1) {
+      this.format = obj.format;
+    }
+    else {
+      throw new Error('invalid format specified');
+    }
+  }
+
+  // Instance vars
+  this.apiKey = obj.apiKey
+}
+
+// Defaults
+steam.prototype.format = 'json';
+steam.prototype.apiKey = '';
+
+// API methods
+
+/**
+ * Gets the news for a specific app
+ * @param {object} obj
+ */
+steam.prototype.getNewsForApp = function(obj) {
+  if (!this.validate(obj, 'getNewsForApp')) return false;
+  obj.path = '/ISteamNews/GetNewsForApp/v0002/?';
+  this.makeRequest(obj)
+}
+
+/**
+ * Gets the global achievement percentages for a specific app
+ * @param {object} obj
+ */
+steam.prototype.getGlobalAchievementPercentagesForApp = function(input) {
+  var obj = this.normalizeAppGameId(input);
+  if (!this.validate(obj, 'getGlobalAchievementPercentagesForApp')) return false;
+  obj.path = '/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?';
+  this.makeRequest(obj)
+}
+
+/**
+ * Gets the player summaries for a list of users
+ * @param {object} obj
+ */
+steam.prototype.getPlayerSummaries = function(obj) {
+  if (!this.validate(obj, 'getPlayerSummaries')) return false;
+  // Turn the array into a comma separated list
+  if (typeof obj.steamids == 'object') obj.steamids = obj.steamids.join('\,');
+  obj.path = '/ISteamUser/GetPlayerSummaries/v0002/?',
+  this.makeRequest(obj)
+}
+
+/**
+ * Gets a user's friend list
+ * @param {object} obj
+ */
+steam.prototype.getFriendList = function(obj) {
+  if (!this.validate(obj, 'getFriendList')) return false;
+  obj.path = '/ISteamUser/GetFriendList/v0001/?',
+  this.makeRequest(obj)
+}
+
+/**
+ * Gets a user's owned games list
+ * @param {object} obj
+ */
+steam.prototype.getOwnedGames = function(obj) {
+    if (!this.validate(obj, 'getOwnedGames')) return false;
+    obj.path = '/IPlayerService/GetOwnedGames/v0001/?';
+    this.makeRequest(obj);
+}
+
+/**
+ * Gets the item schema for a specific game
+ * @param {object} obj
+ */
+steam.prototype.getSchema = function(input) {
+  var obj = this.normalizeAppGameId(input);
+  if (!this.validate(obj, 'getSchema')) return false;
+  obj.path = '/IEconItems_'+obj.gameid+'/GetSchema/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a player's items for a specific game
+ * @param {object} obj
+ */
+steam.prototype.getPlayerItems = function(input) {
+  var obj = this.normalizeAppGameId(input);
+  if (!this.validate(obj, 'getPlayerItems')) return false;
+  obj.path = '/IEconItems_'+obj.gameid+'/GetPlayerItems/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets the prices for items in a game
+ * @param {object} obj
+ */
+steam.prototype.getAssetPrices = function(obj) {
+  var obj = this.normalizeAppGameId(obj);
+  if (!this.validate(obj, 'getAssetPrices')) return false;
+  obj.path = '/ISteamEconomy/GetAssetPrices/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets class info for a specific game asset
+ * @param {object} obj
+ */
+steam.prototype.getAssetClassInfo = function(obj) {
+  var obj = this.normalizeAppGameId(obj);
+  if (!this.validate(obj, 'getAssetClassInfo')) return false;
+  // Convenience allowing to just pass an array of classIds
+  if (obj.classIds &amp;&amp; !obj.class_count) {
+    var i = 0;
+    obj.classIds.forEach(function(id){
+      obj['classid'+i] = id;
+      i++;
+    });
+    obj.class_count = obj.classIds.length;
+  }
+  obj.path = '/ISteamEconomy/GetAssetClassInfo/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a user's achievements for a specific game
+ * @param {object} obj
+ */
+steam.prototype.getPlayerAchievements = function(obj) {
+  var obj = this.normalizeAppGameId(obj);
+  if (!this.validate(obj, 'getPlayerAchievements')) return false;
+  obj.path = '/ISteamUserStats/GetPlayerAchievements/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a user's recently played games
+ * @param {object} obj
+ */
+steam.prototype.getRecentlyPlayedGames = function(obj) {
+  if (!this.validate(obj, 'getRecentlyPlayedGames')) return false;
+  obj.path = '/IPlayerService/GetRecentlyPlayedGames/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a user's stats for a specific game
+ * @param {object} obj
+ */
+steam.prototype.getUserStatsForGame = function(obj) {
+  if(!this.validate(obj, 'getUserStatsForGame')) return false;
+  obj.path = '/ISteamUserStats/GetUserStatsForGame/v0002/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets the global stats for a specific game
+ * @param {object} obj
+ */
+steam.prototype.getGlobalStatsForGame = function(input) {
+  var obj = this.normalizeAppGameId(input);
+  if (typeof obj.name == 'string') obj.name = [obj.name];
+  if (!obj.count) obj.count = obj.name.length;
+  if (!this.validate(obj, 'getGlobalStatsForGame')) return false;
+  obj.path = '/ISteamUserStats/GetGlobalStatsForGame/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Check if a user is playing a shared game
+ * @param {object} obj
+ */
+steam.prototype.isPlayingSharedGame = function(obj) {
+  if (!this.validate(obj, 'isPlayingSharedGame')) return false;
+  obj.path = '/IPlayerService/IsPlayingSharedGame/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a game's statistics schema
+ * @param {object} obj
+ */
+steam.prototype.getSchemaForGame = function(input) {
+  var obj = this.normalizeAppGameId(input);
+  if (!this.validate(obj, 'getSchemaForGame')) return false;
+  obj.path = '/ISteamUserStats/GetSchemaForGame/v2/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a list of bans for a specific user
+ * @param {object} obj
+ */
+steam.prototype.getPlayerBans = function(obj) {
+  if (!this.validate(obj, 'getPlayerBans')) return false;
+  if (typeof obj.steamids == 'object' &amp;&amp; obj.steamids != null) obj.steamids = obj.steamids.join(',');
+  obj.path = '/ISteamUser/GetPlayerBans/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a list of apps and their appid
+ * @param {object} obj
+ */
+steam.prototype.getAppList = function(obj) {
+  obj.path = '/ISteamApps/GetAppList/v2/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a list of servers at a specific address
+ * @param {object} obj
+ */
+steam.prototype.getServersAtAddress = function(obj) {
+  if (!this.validate(obj, 'getServersAtAddress')) return false;
+  obj.path = '/ISteamApps/GetServersAtAddress/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Check if a specific version is the latest version of that game
+ * @param {object} obj
+ */
+steam.prototype.upToDateCheck = function(obj) {
+  if (!this.validate(obj, 'upToDateCheck')) return false;
+  obj.path = '/ISteamApps/UpToDateCheck/v1/?';
+  this.makeRequest(obj);
+}
+
+// TODO: ISteamRemoteStorage
+
+/**
+ * Gets a user's group memberships
+ * @param {object} obj
+ */
+steam.prototype.getUserGroupList = function(obj) {
+  if (!this.validate(obj, 'getUserGroupList')) return false;
+  obj.path = '/ISteamUser/GetUserGroupList/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Resolves a specific vanity URL (seems to no longer work)
+ * @param {object} obj
+ */
+steam.prototype.resolveVanityURL = function(obj) {
+  if (!this.validate(obj, 'resolveVanityURL')) return false;
+  obj.path = '/ISteamUser/ResolveVanityURL/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets the number of current players for a specific game
+ * @param {object} obj
+ */
+steam.prototype.getNumberOfCurrentPlayers = function(obj) {
+  if (!this.validate(obj, 'getNumberOfCurrentPlayers')) return false;
+  obj.path = '/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a user's Steam level
+ * @param {object} obj
+ */
+steam.prototype.getSteamLevel = function(obj) {
+  if (!this.validate(obj, 'getSteamLevel')) return false;
+  obj.path = '/IPlayerService/GetSteamLevel/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a user's badges
+ * @param {object} obj
+ */
+steam.prototype.getBadges = function(obj) {
+  if (!this.validate(obj, 'getBadges')) return false;
+  obj.path = '/IPlayerService/GetBadges/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a user's progress towards a specific badge
+ * @param {object} obj
+ */
+steam.prototype.getCommunityBadgeProgress = function(obj) {
+  if (!this.validate(obj, 'getCommunityBadgeProgress')) return false;
+  obj.path = '/IPlayerService/GetCommunityBadgeProgress/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets info on a specific server
+ * @param {object} obj
+ */
+steam.prototype.getServerInfo = function(obj) {
+  obj.path = '/ISteamWebAPIUtil/GetServerInfo/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets a list of supported API endpoints
+ * @param {object} obj
+ */
+steam.prototype.getSupportedAPIList = function(obj) {
+  obj.path = '/ISteamWebAPIUtil/GetSupportedAPIList/v0001/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets the schema URL for a specific game
+ * @param {object} obj
+ */
+steam.prototype.getSchemaURL = function(input) {
+  var obj = this.normalizeAppGameId(input);
+  if (!this.validate(obj, 'getSchemaURL')) return false;
+  obj.path = '/IEconItems_'+obj.gameid+'/GetSchemaURL/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets the store metadata for a specific game
+ * @param {object} obj
+ */
+steam.prototype.getStoreMetadata = function(input) {
+  var obj = this.normalizeAppGameId(input);
+  if (!this.validate(obj, 'getStoreMetadata')) return false;
+  obj.path = '/IEconItems_'+obj.gameid+'/GetStoreMetadata/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Gets the store status for a specific game (only TF2 currently supported)
+ * @param {object} obj
+ */
+steam.prototype.getStoreStatus = function(input) {
+  var obj = this.normalizeAppGameId(input);
+  if (!this.validate(obj, 'getStoreStatus')) return false;
+  obj.path = '/IEconItems_'+obj.gameid+'/GetStoreStatus/v1/?';
+  this.makeRequest(obj);
+}
+
+/**
+ * Used internally to validate an object before sending an API request. This
+ * could also be used by the user if they need to verify the validity of data
+ * submitted from an outside source. Callback receives two paramers: `err` and
+ * `data`.
+ * @param {object} obj
+ * @param {string} method
+ */
+steam.prototype.validate = function(obj, method) {
+  var error;
+  if (!obj) throw new Error('no arguments passed');
+  // If the user doesn't pass a callback, it makes no sense
+  if (typeof obj.callback != 'function') throw new Error('invalid callback');
+
+  switch(method) {
+    case 'getNewsForApp':
+      if ( typeof obj.appid != 'string' &amp;&amp; typeof obj.appid != 'number') error = 'invalid appid';
+      if ( typeof obj.count != 'string' &amp;&amp; typeof obj.count != 'number') error = 'invalid count';
+      if ( typeof obj.maxlength != 'string' &amp;&amp; typeof obj.maxlength != 'number') error = 'invalid maxlength';
+      break;
+    case 'getGlobalAchievementPercentagesForApp':
+      if ( typeof obj.gameid != 'string' &amp;&amp; typeof obj.gameid != 'number') error = 'invalid gameid';
+      if (!obj.gameid) error = "invalid gameid";
+      break;
+    case 'getPlayerSummaries':
+      if (!obj.steamids) {
+        error = 'invalid steamids';
+      }
+      if (typeof obj.steamids == 'object' &amp;&amp; !obj.steamids.length) {
+        error = 'getPlayerSummaries steamids only accepts a string or array of strings';
+      }
+      if (typeof obj.steamids == 'object' &amp;&amp; obj.steamids.length > 100) error = 'too many steamids';
+      break;
+    case 'getFriendList':
+      if (!obj.steamid) {
+        error = 'invalid steamid';
+      }
+      break;
+    case 'getSchema':
+      if (!obj.gameid || (typeof obj.gameid != 'string' &amp;&amp; typeof obj.gameid != 'number')) {
+        error = 'invalid gameid';
+      }
+      break;
+    case 'getPlayerItems':
+      if (!obj.gameid || (typeof obj.gameid != 'string' &amp;&amp; typeof obj.gameid != 'number')) {
+        error = 'invalid gameid';
+      }
+      if (typeof obj.steamid != 'string') {
+        error = 'getPlayerItems steamid argument only accepts a string';
+      }
+      break;
+    case 'getOwnedGames':
+      if (!obj.steamid) {
+        error = 'invalid steamid';
+      }
+      break;
+    case 'getAssetPrices':
+      if (!obj.appid || (typeof obj.appid != 'string' &amp;&amp; typeof obj.appid != 'number')) {
+        error = 'invalid gameid';
+      }
+      break;
+    case 'getAssetClassInfo':
+      if (!obj.appid || (typeof obj.appid != 'string' &amp;&amp; typeof obj.appid != 'number')) {
+        error = 'invalid gameid';
+      }
+      if (obj.classIds &amp;&amp; !obj.class_count &amp;&amp; !obj.classIds.length) {
+        error = 'classIds convenience property must be array of numbers or strings';
+      }
+      break;
+    case 'getPlayerAchievements':
+      if (!obj.appid || (typeof obj.appid != 'string' &amp;&amp; typeof obj.appid != 'number')) {
+        error = 'invalid gameid';
+      }
+      if (!obj.steamid || (typeof obj.steamid != 'string' &amp;&amp; typeof obj.steamid != 'number')) {
+        error = 'invalid steamid';
+      }
+      if (obj.l &amp;&amp; typeof obj.l != 'string') {
+        error = 'invalid language';
+      }
+      break;
+      case 'getRecentlyPlayedGames':
+        if (!obj.steamid) {
+          error = 'invalid steamid';
+        }
+      break;
+      case 'getUserStatsForGame':
+        if (!obj.appid || (typeof obj.appid != 'string' &amp;&amp; typeof obj.appid != 'number')) {
+          error = 'invalid appid';
+        }
+        if(!obj.steamid || (typeof obj.steamid != 'string' &amp;&amp; typeof obj.steamid != 'number')) {
+          error = 'invalid steamid';
+        }
+      break;
+      case 'getGlobalStatsForGame':
+        if (!obj.name || !Array.isArray(obj.name)) {
+          error = 'invalid name';
+        }
+        if (!obj.appid || (typeof obj.appid != 'string' &amp;&amp; typeof obj.appid != 'number')) {
+          error = 'invalid appid';
+        }
+        if (!obj.count || (typeof obj.count != 'string' &amp;&amp; typeof obj.count != 'number') || obj.count != obj.name.length) {
+          // Could this be created internally if name isn't an array or something else weird?
+          error = 'invalid count on name argument';
+        }
+      break;
+      case 'isPlayingSharedGame':
+        if (!obj.steamid || (typeof obj.steamid != 'string' &amp;&amp; typeof obj.steamid != 'number')) {
+          error = 'invalid steamid';
+        }
+        if (!obj.appid_playing || (typeof obj.appid_playing != 'string' &amp;&amp; typeof obj.appid_playing != 'number')) {
+          error = 'invalid appid_playing';
+        }
+      break;
+      case 'getSchemaForGame':
+        if (!obj.appid || (typeof obj.appid != 'string' &amp;&amp; typeof obj.appid != 'number')) {
+          error = 'invalid appid';
+        }
+      break;
+      case 'getPlayerBans':
+        if (!obj.steamids) {
+          error = 'invalid steamids';
+        }
+        if (typeof obj.steamids == 'object' &amp;&amp; !obj.steamids.length) {
+          error = 'getPlayerBans steamids only accepts a string or array of strings';
+        }
+        if (typeof obj.steamids == 'object' &amp;&amp; obj.steamids.length > 100) error = 'too many steamids';
+      break;
+      case 'getServersAtAddress':
+        if (!obj.addr || typeof obj.addr != 'string' || !this.validateIPv4(obj.addr)) {
+          error = 'invalid addr';
+        }
+      break;
+      case 'upToDateCheck':
+        if (!obj.appid || (typeof obj.appid != 'string' &amp;&amp; typeof obj.appid != 'number')) {
+          error = 'invalid appid';
+        }
+        if (!obj.version || (typeof obj.version != 'string' &amp;&amp; typeof obj.version != 'number')) {
+          error = 'invalid version';
+        }
+      break;
+      case 'getUserGroupList':
+        if (!obj.steamid || (typeof obj.steamid != 'string' &amp;&amp; typeof obj.steamid != 'number')) {
+          error = 'invalid steamid';
+        }
+      break;
+      case 'resolveVanityURL':
+        if (!obj.vanityurl || typeof obj.vanityurl != 'string') {
+          error = 'invalid vanityurl'
+        }
+      break;
+      case 'getNumberOfCurrentPlayers':
+        if (!obj.appid || (typeof obj.appid != 'string' &amp;&amp; typeof obj.appid != 'number')) {
+          error = 'invalid appid';
+        }
+      break;
+      case 'getSteamLevel':
+        if (!obj.steamid || (typeof obj.steamid != 'string' &amp;&amp; typeof obj.steamid != 'number')) {
+          error = 'invalid steamid';
+        }
+      break;
+      case 'getBadges':
+        if (!obj.steamid || (typeof obj.steamid != 'string' &amp;&amp; typeof obj.steamid != 'number')) {
+          error = 'invalid steamid';
+        }
+      break;
+      case 'getCommunityBadgeProgress':
+        if (!obj.steamid || (typeof obj.steamid != 'string' &amp;&amp; typeof obj.steamid != 'number')) {
+          error = 'invalid steamid';
+        }
+        if (typeof obj.badgeid != 'string' &amp;&amp; typeof obj.badgeid != 'number') {
+          error = 'invalid badgeid';
+        }
+      break;
+      case 'getSchemaURL':
+        if (!obj.gameid || (typeof obj.gameid != 'string' &amp;&amp; typeof obj.gameid != 'number')) {
+          error = 'invalid gameid';
+        }
+        if (obj.language &amp;&amp; typeof obj.language != 'string') {
+          error = 'invalid language';
+        }
+      break;
+      case 'getStoreMetadata':
+        if (!obj.gameid || (typeof obj.gameid != 'string' &amp;&amp; typeof obj.gameid != 'number')) {
+          error = 'invalid gameid';
+        }
+        if (obj.language &amp;&amp; typeof obj.language != 'string') {
+          error = 'invalid language';
+        }
+      break;
+      case 'getStoreStatus':
+        if (!obj.gameid || (typeof obj.gameid != 'string' &amp;&amp; typeof obj.gameid != 'number')) {
+          error = 'invalid gameid';
+        }
+      break;
+  }
+  if (error) {
+    obj.callback(error);
+    return false;
+  }
+  return true;
+}
+
+/**
+ * This method is used internally to normalize gameids to appids or vice-versa
+ * @param {object} obj
+ * @return {object}
+ */
+steam.prototype.normalizeAppGameId = function(obj) {
+  if (obj.appid &amp;&amp; !obj.gameid) {
+    obj.gameid = obj.appid;
+  } else if (obj.gameid &amp;&amp; !obj.appid) {
+    obj.appid = obj.gameid;
+  }
+  return obj;
+}
+
+/**
+ * This method is used internally to validate IPv4 IP addresses
+ * @param {string} ip
+ * @return {boolean}
+ */
+steam.prototype.validateIPv4 = function(ip) {
+  var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/g;
+  return ip.match(ipformat);
+}
+
+/**
+ * This method is used internally to make requests to the Steam API
+ * @param {string} obj
+ */
+steam.prototype.makeRequest = function(obj) {
+  var err;
+  var format = this.format;
+  // Clean up the object to get ready to send it to the API
+  var callback = obj.callback;
+  delete obj.callback;
+  var path = obj.path;
+  delete obj.path;
+  obj.key = this.apiKey;
+  obj.format = this.format;
+
+  // Generate the path
+  path += qs.stringify(obj);
+  var options = {
+    host: 'api.steampowered.com',
+    port: 80,
+    path: path
+  };
+  var req = http.get(options, function(res) {
+    var resData = '';
+    var statusCode = res.statusCode;
+    res.on('data', function (chunk) {
+      resData+=chunk;
+    });
+    res.on('end', function(){
+      if (statusCode == 404) {
+        callback('404 Error was returned from steam API');
+        return;
+      } else if (statusCode == 403) {
+        callback('403 Error: Check your API key is correct');
+        return;
+      }
+
+      if (format == 'json') {
+        try {
+          resData = JSON.parse(resData);
+        } catch (e) {
+          callback('JSON response invalid, your API key is most likely wrong');
+          return;
+        }
+      }
+
+      if (  typeof resData.result != 'undefined' &amp;&amp;
+            typeof resData.result.status != 'undefined' &amp;&amp;
+            resData.result.status != 1) {
+        callback(err, resData);
+        return;
+      }
+      callback(err,resData);
+    })
+  }).on('error', function(error) {
+    callback(error);
+  })
+
+}
+module.exports = steam;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sat Jul 01 2017 21:07:01 GMT-0400 (EDT) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
