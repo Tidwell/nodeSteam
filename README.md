@@ -1,5 +1,7 @@
 # steam-web
 
+## [Full Documentation on GH Pages](http://tidwell.github.io/nodeSteam/)
+
 A [node.js](http://github.com/joyent/node) wrapper for Valve's [Steam Web API](http://developer.valvesoftware.com/wiki/Steam_Web_API).  Also supports the methods provided for [TF2/TF2Beta/Portal](http://wiki.teamfortress.com/wiki/WebAPI).
 
 Use of the API requires an API key, obtainable [here](http://steamcommunity.com/dev/apikey).
@@ -357,6 +359,15 @@ $ npm run integrate
 ```
 
 ## Changes
+
+#### 0.5.0
+* Fix README styling (#18)
+* Improve code documentation (#17)
+* Add lint build task
+* Add format build task
+* Add docs build task
+* Add coverage build task
+* Update AUTHORS file
 
 #### 0.4.0
 * Added getAppList
