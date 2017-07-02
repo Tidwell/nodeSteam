@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="steam.html">steam</a><ul class='methods'><li data-type='method'><a href="steam.html#getAppList">getAppList</a></li><li data-type='method'><a href="steam.html#getAssetClassInfo">getAssetClassInfo</a></li><li data-type='method'><a href="steam.html#getAssetPrices">getAssetPrices</a></li><li data-type='method'><a href="steam.html#getBadges">getBadges</a></li><li data-type='method'><a href="steam.html#getCommunityBadgeProgress">getCommunityBadgeProgress</a></li><li data-type='method'><a href="steam.html#getFriendList">getFriendList</a></li><li data-type='method'><a href="steam.html#getGlobalAchievementPercentagesForApp">getGlobalAchievementPercentagesForApp</a></li><li data-type='method'><a href="steam.html#getGlobalStatsForGame">getGlobalStatsForGame</a></li><li data-type='method'><a href="steam.html#getNewsForApp">getNewsForApp</a></li><li data-type='method'><a href="steam.html#getNumberOfCurrentPlayers">getNumberOfCurrentPlayers</a></li><li data-type='method'><a href="steam.html#getOwnedGames">getOwnedGames</a></li><li data-type='method'><a href="steam.html#getPlayerAchievements">getPlayerAchievements</a></li><li data-type='method'><a href="steam.html#getPlayerBans">getPlayerBans</a></li><li data-type='method'><a href="steam.html#getPlayerItems">getPlayerItems</a></li><li data-type='method'><a href="steam.html#getPlayerSummaries">getPlayerSummaries</a></li><li data-type='method'><a href="steam.html#getRecentlyPlayedGames">getRecentlyPlayedGames</a></li><li data-type='method'><a href="steam.html#getSchema">getSchema</a></li><li data-type='method'><a href="steam.html#getSchemaForGame">getSchemaForGame</a></li><li data-type='method'><a href="steam.html#getSchemaURL">getSchemaURL</a></li><li data-type='method'><a href="steam.html#getServerInfo">getServerInfo</a></li><li data-type='method'><a href="steam.html#getServersAtAddress">getServersAtAddress</a></li><li data-type='method'><a href="steam.html#getSteamLevel">getSteamLevel</a></li><li data-type='method'><a href="steam.html#getStoreMetadata">getStoreMetadata</a></li><li data-type='method'><a href="steam.html#getStoreStatus">getStoreStatus</a></li><li data-type='method'><a href="steam.html#getSupportedAPIList">getSupportedAPIList</a></li><li data-type='method'><a href="steam.html#getUserGroupList">getUserGroupList</a></li><li data-type='method'><a href="steam.html#getUserStatsForGame">getUserStatsForGame</a></li><li data-type='method'><a href="steam.html#isPlayingSharedGame">isPlayingSharedGame</a></li><li data-type='method'><a href="steam.html#makeRequest">makeRequest</a></li><li data-type='method'><a href="steam.html#normalizeAppGameId">normalizeAppGameId</a></li><li data-type='method'><a href="steam.html#resolveVanityURL">resolveVanityURL</a></li><li data-type='method'><a href="steam.html#upToDateCheck">upToDateCheck</a></li><li data-type='method'><a href="steam.html#validate">validate</a></li><li data-type='method'><a href="steam.html#validateIPv4">validateIPv4</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>steam-web</h1><p>A <a href="http://github.com/joyent/node">node.js</a> wrapper for Valve's <a href="http://developer.valvesoftware.com/wiki/Steam_Web_API">Steam Web API</a>.  Also supports the methods provided for <a href="http://wiki.teamfortress.com/wiki/WebAPI">TF2/TF2Beta/Portal</a>.</p>
+<p>Use of the API requires an API key, obtainable <a href="http://steamcommunity.com/dev/apikey">here</a>.</p>
+<p>This implementation is not supported, endorsed, or created by Valve - I'm just a fan.  This is just a wrapper - all of Valve's terms and conditions for using their API still apply, see the <a href="http://steamcommunity.com/dev">Steam community developer page</a> for additional information.</p>
+<h2>Installation</h2><pre class="prettyprint source lang-bash"><code>$ npm install steam-web</code></pre><h3>Methods</h3><p>All methods accept a single options object.  The key names match the query string parameters specified in the valve documentation. See usage and the valve documentation for any additional params.</p>
+<p>If using JSON for results (default), the result will automatically be parsed into a json object before being passed to the callback.  Any other formats will return the raw data (xml or vdf).</p>
+<h4>getNewsForApp</h4><h4>getGlobalAchievementPercentagesForApp</h4><h4>getPlayerSummaries</h4><h4>getFriendList</h4><h4>getSchema</h4><h4>getPlayerItems</h4><h4>getAssetPrices</h4><h4>getAssetClassInfo</h4><h4>getPlayerAchievements</h4><h4>getRecentlyPlayedGames</h4><h4>getUserStatsForGame</h4><h4>getOwnedGames</h4><h4>getGlobalStatsForGame</h4><h4>isPlayingSharedGame</h4><h4>getSchemaForGame</h4><h4>getPlayerBans</h4><h4>getAppList</h4><h4>getServersAtAddress</h4><h4>upToDateCheck</h4><h4>getUserGroupList</h4><h4>resolveVanityURL</h4><h4>getNumberOfCurrentPlayers</h4><h4>getSteamLevel</h4><h4>getBadges</h4><h4>getCommunityBadgeProgress</h4><h4>getServerInfo</h4><h4>getSupportedAPIList</h4><h4>getSchemaURL</h4><h4>getStoreMetadata</h4><h4>getStoreStatus</h4><h2>Usage</h2><pre class="prettyprint source lang-javascript"><code>var steam = require('steam-web');
+
+var s = new steam({
+  apiKey: 'XXXXXXXXXXXXXXXX',
+  format: 'json' //optional ['json', 'xml', 'vdf']
+});
+
+s.getNewsForApp({
+  appid: 440,
+  count: 3,
+  maxlength: 300,
+  callback: function(err, data) {
+    console.log(data);
+  }
+})
+s.getGlobalAchievementPercentagesForApp({
+  gameid: 440,
+  callback: function(err, data) {
+    console.log(data);
+  }
+});
+s.getPlayerSummaries({
+  steamids: ['76561198037414410', '76561197960435530'],
+  callback: function(err, data) {
+    console.log(data);
+  }
+})
+s.getFriendList({
+  steamid: '76561197960435530',
+  relationship: 'all', //'all' or 'friend'
+  callback: function(err,data) {
+    console.log(data);
+  },
+})
+s.getSchema({
+  gameid: 440,
+  callback: function(err, data) {
+    console.log(data);
+  }
+})
+s.getPlayerItems({
+  gameid: 440,
+  steamid: '76561197960435530',
+  callback: function(err, data) {
+    console.log(data);
+  }
+})
+s.getAssetPrices({
+  appid: 440,  //can also use gameid instead for convenience
+  callback: function(err,data) {
+    console.log(data);
+  }
+})
+s.getPlayerAchievements({
+  gameid: 440,
+  steamid: '76561197960435530',
+  l: 'en',
+  callback: function(err,data) {
+    console.log(data);
+  }
+})
+s.getRecentlyPlayedGames({
+  steamid: '76561197960435530',
+  callback: function(err,data) {
+    console.log(data)
+  }
+})
+s.getOwnedGames({
+  steamid: '76561197960435530',
+  callback: function(err,data) {
+    console.log(data)
+  }
+})
+s.getUserStatsForGame({
+  steamid: '76561197963506690',
+  appid: 730,
+  callback: function(err,data) {
+    console.log(data);
+  }
+})
+s.getGlobalStatsForGame({
+  appid: 17740,
+  name: ['global.map.emp_isle'], // can also pass a single string
+  count: 1, // or you can let the module work it out for you
+  callback: function(err,data) {
+    console.log(data);
+  }
+})
+s.isPlayingSharedGame({
+  steamid: '76561198120639625',
+  appid_playing: 730,
+  callback: function(err,data) {
+    console.log(data);
+  }
+})
+s.getSchemaForGame({
+  appid: 730,
+  callback: function(err,data) {
+    console.log(data);
+  }
+})
+s.getPlayerBans({
+  steamids: ['76561198120639625'], // can also pass a single string
+  callback: function(err,data) {
+    console.log(data);
+  }
+})
+s.getAppList({
+  callback: function(err, data) {
+    console.log(data);
+  }
+})
+s.getServersAtAddress({
+  addr: '193.192.58.116',
+  callback: function(err, data) {
+    console.log(data);
+  }
+})    
+s.upToDateCheck({
+  version: 100,
+  appid: 440,
+  callback: function(err, data) {
+    console.log(data);
+  }
+})  
+s.getUserGroupList({
+  steamid: '76561197960435530',
+  callback: function(err, data) {
+    console.log(data);
+  }
+})    
+s.resolveVanityURL({
+  vanityurl: 'vincegogh',
+  callback: function(err, data) {
+    console.log(data);
+  }
+})  
+s.getNumberOfCurrentPlayers({
+  appid: 440,
+  callback: function(err, data) {
+    console.log(data);
+  }
+})
+s.getSteamLevel({
+  steamid: '76561197960435530',
+  callback: function(err, data) {
+    console.log(data);
+  }
+})    
+s.getBadges({
+  steamid: '76561197960435530',
+  callback: function(err, data) {
+    console.log(data);   
+  }
+})
+s.getCommunityBadgeProgress({
+  steamid: '76561197960435530',
+  badgeid: 2,
+  callback: function(err, data) {
+    console.log(data);
+  }
+})  
+s.getServerInfo({
+  callback: function(err, data) {
+    console.log(data);
+  }
+})    
+s.getSupportedAPIList({
+  callback: function(err, data) {
+    console.log(data);
+  }
+})
+s.getSchemaURL({
+  appid: 440,
+  callback: function(err, data) {
+    console.log(data);
+  }
+})    
+s.getStoreMetadata({
+  appid: 440,
+  callback: function(err, data) {
+    console.log(data);
+  }
+})
+s.getStoreStatus({
+  appid: 440,
+  callback: function(err, data) {
+    console.log(data);
+  }
+})</code></pre><p>There are two ways to use getAssetClassInfo.  By default, the Steam API
+wants a query string formatted as: ?classid0=1234&amp;classid1=5678&amp;class_count=2</p>
+<p>As such, you can either manually generate the keys and call the method like this:</p>
+<pre class="prettyprint source lang-javascript"><code>s.getAssetClassInfo({
+  appid: 440, //can also use gameid instead for convenience
+  classid0: '16891096',
+  classid1: 151,
+  class_count: 2,
+  callback: function(err,data) {
+    console.log(data);
+  }
+})</code></pre><p>OR, we have provided a convenience property so you can just pass an array of ids
+(when using the convenience property, you don't need to pass class_count either)</p>
+<pre class="prettyprint source lang-javascript"><code>s.getAssetClassInfo({
+  appid: 440, //can also use gameid instead for convenience
+  classIds: ['16891096',151],
+  callback: function(err,data) {
+    console.log(data);
+  }
+})</code></pre><h2>Changes</h2><h4>0.4.0</h4><ul>
+<li>Added getAppList</li>
+<li>Added getServersAtAddress</li>
+<li>Added upToDateCheck</li>
+<li>Added getUserGroupList</li>
+<li>Added resolveVanityURL</li>
+<li>Added getNumberOfCurrentPlayers</li>
+<li>Added getSteamLevel</li>
+<li>Added getBadges</li>
+<li>Added getCommunityBadgeProgress</li>
+<li>Added getServerInfo</li>
+<li>Added getSupportedAPIList</li>
+<li>Added getSchemaURL</li>
+<li>Added getStoreMetadata</li>
+<li>Added getStoreStatus</li>
+<li>Updated Readme and tests</li>
+<li>Updated AUTHORS file</li>
+</ul>
+<h4>0.3.0</h4><ul>
+<li>Added getGlobalStatsForGame</li>
+<li>Added isPlayingSharedGame</li>
+<li>Added getSchemaForGame</li>
+<li>Added getPlayerBans</li>
+<li>Replaced tests with chai/mocha</li>
+<li>Updated Readme</li>
+<li>Added AUTHORS file</li>
+</ul>
+<h4>0.2.5</h4><ul>
+<li>Added error handling for invalid api keys</li>
+<li>Added tests and README</li>
+</ul>
+<h4>0.2.4</h4><ul>
+<li>Added getUserStatsForGame</li>
+<li>Updated README and tests, added gitignore</li>
+</ul>
+<h4>0.2.3</h4><ul>
+<li>Added getOwnedGames</li>
+<li>Added getRecentlyPlayedGames</li>
+<li>Add getPlayerAchievements method</li>
+<li>Add an error handler to the HTTP get request. This will capture ETIMEDOUT and other connections errors.</li>
+<li>Updated README and tests with new methods</li>
+</ul>
+<h4>0.2.1</h4><ul>
+<li>Changed npm module to steam-web to allow https://github.com/seishun/node-steam to use steam npm module name, update your dependencies.</li>
+</ul>
+<h4>0.1.3</h4><ul>
+<li>Implemented new API methods from 12/1/2011 update: getAssetClassInfo, getAssetPrices, and getFriendList</li>
+<li>Fixed bug where callbacks were fired twice for certain error events</li>
+<li>Added convenience property to getAssetClassInfo (classIds instead of forcing manual property generation)</li>
+</ul>
+<h4>0.1.2</h4><ul>
+<li>Changed requirements to node &gt;= 0.4.0</li>
+<li>Modified API so first argument of all callbacks is err (to correspond with standard practices)</li>
+<li>Additional error handling (though methods will return empty arrays if invalid ids are sent to steam</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sat Jul 01 2017 21:07:01 GMT-0400 (EDT) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
