@@ -354,6 +354,18 @@ $ npm run format
 $ npm run lint
 ```
 
+### Generate Docs
+
+```bash
+$ npm run docs
+```
+
+### Generate Coverage Report
+
+```bash
+$ npm run coverage
+```
+
 ### All (travis integration tests)
 
 ```bash
@@ -361,6 +373,14 @@ $ npm run integrate
 ```
 
 ## Changes
+
+#### 0.6.0
+* Add apiVersion config property to all methods for changing generated enpoints (#24)
+* Add tests for addVersion method (#24)
+* Split tests into multiple .spec files
+* Fix jsfmt for proper indentation
+* Marked private methods as private (hidden in docs)
+* Update tasks in Readme
 
 #### 0.5.0
 * Fix README styling (#18)
