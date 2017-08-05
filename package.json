@@ -19,9 +19,9 @@
     "node >= 0.4.0"
   ],
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha ./test/newtests.js --timeout 20000",
+    "test": "./node_modules/mocha/bin/mocha \"./test/**/*.spec.js\" --timeout 20000",
 
-    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha ./test/newtests.js -- --timeout 20000",
+    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha \"./test/**/*.spec.js\" -- --timeout 20000",
     "format-lib": "./node_modules/jsfmt/bin/jsfmt -w ./lib ./*.js",
     "format-spec": "./node_modules/jsfmt/bin/jsfmt -w ./test",
     "format": "npm run-script format-lib && npm run-script format-spec",

@@ -18,6 +18,8 @@ $ npm install steam-web
 
 All methods accept a single options object.  The key names match the query string parameters specified in the valve documentation. See usage and the valve documentation for any additional params.
 
+All methods can be passed a ``.apiVersion`` property that overrides the default api version in the url.  Some methods (such as getSchema) will support different games on different versions (TF2 is only supported on v0001, CSGO is only supported on v0002). You can use this property to change the version for the api request if you are not getting back the expected response.
+
 If using JSON for results (default), the result will automatically be parsed into a json object before being passed to the callback.  Any other formats will return the raw data (xml or vdf).
 
 #### getNewsForApp
