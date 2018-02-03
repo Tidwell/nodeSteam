@@ -374,6 +374,10 @@ $ npm run integrate
 
 ## Changes
 
+#### 0.7.0
+* Add error handler to catch all 4XX http error codes
+* Add deprecation information to getPlayerItems for CS:GO
+
 #### 0.6.0
 * Add apiVersion config property to all methods for changing generated enpoints (#24)
 * Add tests for addVersion method (#24)
